@@ -16,7 +16,7 @@ alter table post modify column id bigint;
 
 
 
--- decimal(총자릿수, 소수부자릿수
+-- decimal(총자릿수, 소수부자릿수) : 부동소수점, 고정소수점(오차 발생x)
 alter table author add column height decimal(4, 1);
 -- 정상적으로 insert
 insert into author(id, name, email, height) values(7, "홍길동3", "sss@naver.com", 175.2);

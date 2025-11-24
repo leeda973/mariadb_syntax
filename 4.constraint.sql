@@ -8,7 +8,7 @@ alter table author modify column name varchar(255);
 alter table author modify column name varchar(255) not null unique;
 
 
--- 조회
+-- fk명 조회
 select * from information_schema.key_column_usage where table_name='post';
 
 -- pk/fk 추가/제거
@@ -27,7 +27,7 @@ alter table post add constraint post_pk foreign key(author_id) references author
 
 
 -- on delete/on update 제약조건 변경 테스트
-alter table post add constraint post_pk foreign key(author_id) references author(id) on delete set null on update cascade;
+alter table post add constraint post_pk foreign key(author_id) references autor(id) on delete set null on update cascade;
 
 
 
@@ -41,6 +41,18 @@ alter table post add constraint post_fk foreign key(author_id) references author
     -- 3-1) 삭제 테스트
         
     -- 3-2) 수정 테스트
+
+
+-- default 옵션
+-- 어떤 컬럼이든 default 지정이 가능하지만, 일반적으로 enum 타입 및 현재 시간에서 많이 사용.
+alter table author modify column name varchar(255) default 'anonymous';
+-- auto_increment : 숫자값을 입력 안했을 때, 마지막에 입력된 가장 큰 값에 +1만큼 자동으로 증가된 숫자값 적용
+alter table author modify column id bigint auto_increment;
+alter table post modify column id bigint auto_increment;
+
+
+alter table post add column user_id char(36) default (uuid());
+
 
 
 
