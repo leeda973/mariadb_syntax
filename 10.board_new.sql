@@ -24,10 +24,13 @@ insert into author (email, name, password) values('ccc@naver.com', 'hong3', 3433
 insert into address(country, city, street, author_id) values('korea', 'seoul', 'sinjeong', 3);
 -- 글쓰기
 insert into post(title, contents) values('hello2', 'hello2 world');
+-- 추후 참여자
+-- update ...
+ -- insert into author_post_list values(1, 2)
 
 
 -- 글 전체목록 조회하기 : 제목, 내용, 글쓴이 이름이 조회(중복은 distinct)가 되도록 select쿼리 생성
-select distinct p.title, p.contents, a.name from post p inner join author_post_list inner join author a;
+select distinct p.id, p.title, p.contents, a.name from post p inner join author_post_list ap on p.id = ap.post_id inner join author a on a.id = ap.author_id;
 
 
 
